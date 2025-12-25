@@ -1,5 +1,10 @@
+import tkinter as tk
 import json
-import cow
 
-cow.moo("Hello, why are you alive?")
-cow.moomoo("Can", "I", "type on", "multiple lines", "?")
+root = tk.Tk()
+root.title("Basic App")
+root.geometry("600x400")
+root.configure(bg= "#000000")
+root.iconbitmap("Logo.ico")
+
+root.mainloop()
