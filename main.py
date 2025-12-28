@@ -7,9 +7,20 @@ def while_empty(x):
         x = input()
     return x
 
+print("Please enter the name of the dictionary file (must end in '.json'). If you haven't yet created a file, please just press enter.")
+file_name = input()
 
+if not file_name:  # if enter is pressed without any input, new file created
+    print("Please enter what you'd like to name your dictionary file. Make sure it ends in .json")
+    file_name = input()
+
+    while not file_name[-5:] == ".json":
+        print("Please enter a file name ending in '.json'")
+        file_name = input()
+    storage.create_dict(file_name)
+
+temp_dict = storage.load_dict(file_name)
 running = True
-temp_dict = {}
 labels = []
 
 while running:
@@ -22,13 +33,10 @@ while running:
     command = input().upper()
     match command:
         case "Q":
+            storage.save_dict(file_name, temp_dict)
             running = False
 
         case "C":
-            print("Enter the name of the dictionary file. If you don't have a dictionary file yet, enter the name you'd like to give it")
-            file_name = input()
-            file_name = while_empty(file_name)
-
             print("Enter the word you'd like to add")
             word = input()
             word = while_empty(word)
@@ -45,35 +53,19 @@ while running:
                     break
                 labels.append(label)
                     
-            add_labels = True
-            temp_dict = storage.load_dict(file_name)
             crud.add_word(temp_dict, word, definition, labels)
-            storage.save_dict(file_name, temp_dict)
             labels = []
 
         case "R":
-            print("Please enter the dictionary file. If you don't have a dictionary yet, press enter, then enter in 'C'.")
-            file_name = input()
-            if file_name:
-                print(storage.load_dict(file_name))
+            crud.view_dict(temp_dict)
 
         case "F":
-            print("Please enter the name of the dictionary file. If you don't have a dictionary yet, press enter, then enter in 'C'.")
-            file_name = input()
-
-            if file_name:
-                print("Please enter the word you'd like to find")
-                word = input()
-                word = while_empty(word)
-                
-                temp_dict = storage.load_dict(file_name)
-                crud.find_word(temp_dict, word)
+            print("Please enter the word you'd like to find")
+            word = input()
+            word = while_empty(word)
+            crud.find_word(temp_dict, word)
             
         case "U":
-            print("Please enter the name of the dictionary file you'd like to update")
-            file_name = input()
-            file_name = while_empty(file_name)
-
             print("Please enter the word whose values you'd like to update")
             word = input()
             word = while_empty(word)
@@ -90,21 +82,12 @@ while running:
                     break
                 labels.append(label)
                 
-            add_labels = True
-            temp_dict = storage.load_dict(file_name)
             crud.update_dict(temp_dict, word, definition, labels)
-            storage.save_dict(file_name, temp_dict)
             labels = []
 
         case "D":
-            print("Please enter the name of the dictionary file you'd like to delete")
-            file_name = input()
-            file_name = while_empty(file_name)
-
             print("Please enter the word you'd like to delete.")
             word = input()
             word = while_empty(word)
 
-            temp_dict = storage.load_dict(file_name)
             crud.delete_word(temp_dict, word)
-            storage.save_dict(file_name, temp_dict)

@@ -10,3 +10,7 @@ def load_dict(file_name: str):
         return {}
     with open(file_name, "r", encoding = "utf-8") as f:
         return json.load(f)
+
+def create_dict(file_name: str):
+    with open(file_name, "x") as f:
+        return
