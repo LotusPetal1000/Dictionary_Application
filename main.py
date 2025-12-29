@@ -27,7 +27,8 @@ while running:
     print("Press and enter 'Q' to quit the programme.")
     print("To create a word in your dictionary, enter 'C'.")
     print("To read your entire dictionary, enter 'R'.")
-    print("To find a word from your dictionary, ener 'F'.")
+    print("To find a word from your dictionary, enter 'F'.")
+    print("To perform a partial search, enter 'P'.")
     print("To update a word from your dictionary, enter 'U'.")
     print("To delete a word from your dictionary, enter 'D'.")
     command = input().upper()
@@ -64,6 +65,17 @@ while running:
             word = input()
             word = while_empty(word)
             crud.find_word(temp_dict, word)
+        
+        case "P":
+            print("Please enter what you'd like to search for")
+            query = input()
+            query = while_empty(query)
+            results = crud.partial_search(temp_dict, query)
+            if results:
+                for result in results:
+                    print(result)
+            else:
+                print("No results.")
             
         case "U":
             print("Please enter the word whose values you'd like to update")

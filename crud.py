@@ -21,6 +21,9 @@ def find_word(dictionary: dict, word: str):
     else:
         print(f"{word} not found")
 
+def partial_search(dictionary: dict, query: str):
+    return [word for word in dictionary if query.lower() in word.lower()]
+
 def view_dict(dictionary: dict):
     for x, y in dictionary.items():
         print(f"{x} : {y}")
