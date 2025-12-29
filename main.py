@@ -14,7 +14,7 @@ if not file_name:  # if enter is pressed without any input, new file created
     print("Please enter what you'd like to name your dictionary file. Make sure it ends in .json")
     file_name = input()
 
-    while not file_name[-5:] == ".json":
+    while not file_name.endswith(".json"):
         print("Please enter a file name ending in '.json'")
         file_name = input()
     storage.create_dict(file_name)

@@ -13,4 +13,4 @@ def load_dict(file_name: str):
 
 def create_dict(file_name: str):
     with open(file_name, "x") as f:
-        return
+        json.dump({}, f)
